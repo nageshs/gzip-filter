@@ -1,0 +1,30 @@
+<project name="gzip-filter" default="all">
+
+ <property name="dest" value="./build"/>
+ <property name="jardest" value="./WEB-INF/lib"/>
+ <property name="dist" value="./dist"/>
+ <property name="jarname" value="gzip-filter.jar"/>
+
+ <target name="all" depends="javac"/>
+
+ <target name="javac">
+  <mkdir dir="${dest}"/>
+  <javac destdir="${dest}" srcdir="./src" includes="**/*.java">
+     <classpath>
+       <pathElement location="java.class.path"/>
+     </classpath>    
+  </javac>
+ </target>
+
+ <target name="jar" depends="javac">
+  <mkdir dir="${jardest}"/>
+  <jar jarfile="${jardest}/${jarname}" basedir="${dest}"/>
+  <delete dir="${dest}" quiet="true"/>
+ </target>
+
+ <target name="clean">
+  <delete dir="${dest}"/>
+  <delete dir="${dist}"/>
+ </target> 
+
+</project>
